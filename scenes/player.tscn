@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqnmm04h6uy37"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_qwsdr"]
+[ext_resource type="Texture2D" uid="uid://djjlqkaars3we" path="res://assets/crosshair.png" id="2_gkylp"]
+[ext_resource type="PackedScene" uid="uid://bkmmvge4fpef0" path="res://assets/kenney_blaster-kit/Models/GLTF format/blasterR.glb" id="2_raumg"]
+[ext_resource type="Shader" path="res://shaders/pixel.gdshader" id="3_depb4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r061v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g04tf"]
+render_priority = 0
+shader = ExtResource("3_depb4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3gw6n"]
+material = SubResource("ShaderMaterial_g04tf")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oqvm1"]
+
+[node name="Player" type="CharacterBody3D" groups=["teleportable"]]
+script = ExtResource("1_qwsdr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00382, 0)
+shape = SubResource("CapsuleShape3D_r061v")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
+near = 0.001
+
+[node name="Blaster" parent="Head/Camera3D" instance=ExtResource("2_raumg")]
+transform = Transform3D(0.797977, 0, -0.0568637, 0, 0.8, 0, 0.0568637, 0, 0.797977, 0.286714, -0.288474, -0.453592)
+visible = false
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -100)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Camera3D"]
+mesh = SubResource("QuadMesh_3gw6n")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gkylp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_oqvm1")

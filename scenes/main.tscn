@@ -1,0 +1,444 @@
+[gd_scene load_steps=32 format=3 uid="uid://ggldveflfck4"]
+
+[ext_resource type="PackedScene" uid="uid://cqnmm04h6uy37" path="res://scenes/player.tscn" id="1_1r2ix"]
+[ext_resource type="PackedScene" uid="uid://wltd38hlfbpw" path="res://scenes/portal.tscn" id="3_455co"]
+[ext_resource type="Texture2D" uid="uid://bkaiyw6ajf4d1" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_01.png" id="3_d4y3s"]
+[ext_resource type="Texture2D" uid="uid://c5jmqemit1i04" path="res://assets/kenney_prototype-textures/PNG/Green/texture_03.png" id="4_dj22c"]
+[ext_resource type="FontFile" uid="uid://d2whs51uyd1hu" path="res://assets/Inter-VariableFont_opsz,wght.ttf" id="4_e56b4"]
+[ext_resource type="Texture2D" uid="uid://c7efxgoqfpp3a" path="res://assets/kenney_prototype-textures/PNG/Red/texture_02.png" id="5_xqj7t"]
+[ext_resource type="Texture2D" uid="uid://dtp5je4r1xb4b" path="res://assets/kenney_prototype-textures/PNG/Orange/texture_05.png" id="6_xyk2g"]
+[ext_resource type="Texture2D" uid="uid://bwfb8crbyvlh1" path="res://assets/kenney_prototype-textures/PNG/Orange/texture_03.png" id="7_0hbl4"]
+[ext_resource type="Texture2D" uid="uid://ds56h5hh2iiec" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_04.png" id="8_4uis7"]
+[ext_resource type="FontFile" uid="uid://umvqvpf3uopu" path="res://assets/PressStart2P-Regular.ttf" id="8_g0pka"]
+[ext_resource type="Script" path="res://scripts/collectible_blaster.gd" id="9_xyoti"]
+[ext_resource type="PackedScene" uid="uid://bkmmvge4fpef0" path="res://assets/kenney_blaster-kit/Models/GLTF format/blasterR.glb" id="10_av82l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggakw"]
+albedo_texture = ExtResource("3_d4y3s")
+uv1_triplanar = true
+
+[sub_resource type="TextMesh" id="TextMesh_yufqs"]
+text = "Mouse to look 
+around"
+font = ExtResource("8_g0pka")
+font_size = 96
+
+[sub_resource type="TextMesh" id="TextMesh_0eo5a"]
+text = "... and WASD
+to move"
+font = ExtResource("8_g0pka")
+font_size = 96
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pccgy"]
+albedo_texture = ExtResource("3_d4y3s")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o187l"]
+albedo_texture = ExtResource("4_dj22c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkics"]
+albedo_texture = ExtResource("6_xyk2g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76bwf"]
+albedo_texture = ExtResource("6_xyk2g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbe7u"]
+albedo_texture = ExtResource("6_xyk2g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4r8s"]
+albedo_texture = ExtResource("7_0hbl4")
+
+[sub_resource type="TextMesh" id="TextMesh_xp4jf"]
+text = "Space to jump"
+font = ExtResource("8_g0pka")
+font_size = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qc05v"]
+albedo_texture = ExtResource("3_d4y3s")
+uv1_triplanar = true
+
+[sub_resource type="TextMesh" id="TextMesh_0lgm0"]
+text = "These are portals"
+font = ExtResource("8_g0pka")
+font_size = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pcu5"]
+albedo_texture = ExtResource("8_4uis7")
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i6djs"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="TextMesh" id="TextMesh_hetg6"]
+text = "It's dangerous to go alone!
+Take this."
+font = ExtResource("8_g0pka")
+font_size = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ewe4y"]
+albedo_texture = ExtResource("5_xqj7t")
+uv1_triplanar = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e4lgr"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_6vcnl"]
+sky_material = SubResource("ProceduralSkyMaterial_e4lgr")
+
+[sub_resource type="Environment" id="Environment_3jvi4"]
+background_mode = 2
+sky = SubResource("Sky_6vcnl")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="main" type="Node3D"]
+
+[node name="intro room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.681, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="intro room"]
+material_override = SubResource("StandardMaterial3D_ggakw")
+use_collision = true
+flip_faces = true
+size = Vector3(20, 10, 20)
+
+[node name="Label3D" type="Label3D" parent="intro room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0138445, -6.86472)
+visible = false
+outline_modulate = Color(0.28485, 0.28485, 0.28485, 1)
+text = "WASD to move"
+font = ExtResource("4_e56b4")
+font_size = 196
+
+[node name="Label3D2" type="Label3D" parent="intro room"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.55758, -0.0138445, 0.000350952)
+visible = false
+outline_modulate = Color(0.28485, 0.28485, 0.28485, 1)
+text = ".... and mouse to look around"
+font = ExtResource("4_e56b4")
+font_size = 196
+
+[node name="Portal" parent="intro room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, -2.06875, 9.91028)
+player = NodePath("../../Player")
+other_portal = NodePath("../../jump room/Portal2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="intro room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.319, 0)
+light_energy = 2.778
+omni_range = 20.0
+omni_attenuation = 0.798
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="intro room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.3098)
+mesh = SubResource("TextMesh_yufqs")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="intro room"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.03633, 0, -0.234554)
+mesh = SubResource("TextMesh_0eo5a")
+
+[node name="jump room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.681, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38)
+material_override = SubResource("StandardMaterial3D_pccgy")
+use_collision = true
+flip_faces = true
+size = Vector3(40, 30, 40)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(-0.0337483, 0, -0.99943, 0, 1, 0, 0.99943, 0, -0.0337483, -0.365921, -13.4178, 31.416)
+material_override = SubResource("StandardMaterial3D_o187l")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(0.822233, 0, -0.56915, 0, 1, 0, 0.56915, 0, 0.822233, 5.5729, -11.9714, 30.1427)
+material_override = SubResource("StandardMaterial3D_gkics")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(0.730627, 0, -0.682777, 0, 1, 0, 0.682777, 0, 0.730627, 8.08342, -10.6467, 34.7437)
+material_override = SubResource("StandardMaterial3D_o187l")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(0.274395, 0, -0.961617, 0, 1, 0, 0.961617, 0, 0.274395, 10.7431, -9.77503, 40.1726)
+material_override = SubResource("StandardMaterial3D_76bwf")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.7431, -8.42582, 56.8146)
+material_override = SubResource("StandardMaterial3D_rbe7u")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.69414, -8.42582, 56.8146)
+material_override = SubResource("StandardMaterial3D_o187l")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.18041, -9.41111, 56.8146)
+material_override = SubResource("StandardMaterial3D_l4r8s")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(0.0110302, 0, -0.999939, 0, 1, 0, 0.999939, 0, 0.0110302, -17.7406, -9.41111, 56.8146)
+material_override = SubResource("StandardMaterial3D_o187l")
+use_collision = true
+size = Vector3(2.20996, 0.25, 3.6947)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="jump room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4517, -9.77503, 47.1169)
+material_override = SubResource("StandardMaterial3D_o187l")
+use_collision = true
+size = Vector3(2.20996, 0.25, 17.5172)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="jump room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.319, 37.0684)
+light_energy = 8.009
+omni_range = 32.866
+omni_attenuation = 0.518
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="jump room"]
+transform = Transform3D(-1, 0, 8.74228e-08, 8.74228e-08, -4.37114e-08, 1, 3.82137e-15, 1, 4.37114e-08, -0.388261, -14.6561, 29.1418)
+mesh = SubResource("TextMesh_xp4jf")
+skeleton = NodePath("../Label3D3")
+
+[node name="Label3D3" type="Label3D" parent="jump room"]
+transform = Transform3D(-1, 0, 8.74228e-08, 8.74228e-08, -4.37114e-08, 1, 3.82137e-15, 1, 4.37114e-08, -0.388261, -14.6561, 29.1418)
+visible = false
+outline_modulate = Color(0.28485, 0.28485, 0.28485, 1)
+text = "Space to Jump"
+font = ExtResource("4_e56b4")
+font_size = 196
+
+[node name="Portal2" parent="jump room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, -4.73737, 18.2168)
+player = NodePath("../../Player")
+other_portal = NodePath("../../intro room/Portal")
+
+[node name="Portal" parent="jump room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -19.9616, -7.34744, 56.3977)
+player = NodePath("../../Player")
+other_portal = NodePath("../../portal intro room/Portal2")
+
+[node name="portal intro room" type="Node3D" parent="."]
+
+[node name="Portal2" parent="portal intro room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15271, 6.13348, 69.1712)
+player = NodePath("../../Player")
+other_portal = NodePath("../../jump room/Portal")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="portal intro room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.681, 79.1426)
+material_override = SubResource("StandardMaterial3D_qc05v")
+use_collision = true
+flip_faces = true
+size = Vector3(20, 10, 20)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="portal intro room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827023, 4.56438, 78.9963)
+light_energy = 2.778
+omni_range = 20.0
+omni_attenuation = 0.798
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="portal intro room"]
+transform = Transform3D(-1, -8.74228e-08, 1.78814e-07, 1.78814e-07, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 2.5332e-06, -0.294613, 80.6053)
+mesh = SubResource("TextMesh_0lgm0")
+skeleton = NodePath("../Label3D3")
+
+[node name="Label3D4" type="Label3D" parent="portal intro room"]
+transform = Transform3D(-1, 0, 8.74228e-08, 8.74228e-08, -4.37114e-08, 1, 3.82137e-15, 1, 4.37114e-08, -0.388261, -0.30808, 80.2812)
+visible = false
+outline_modulate = Color(0.28485, 0.28485, 0.28485, 1)
+text = "These are portals"
+font = ExtResource("4_e56b4")
+font_size = 196
+
+[node name="Portal3" parent="portal intro room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.78592, 2.49463, 79.8877)
+player = NodePath("../../Player")
+other_portal = NodePath("../Portal4")
+
+[node name="Portal4" parent="portal intro room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.59876, 2.49463, 79.8877)
+player = NodePath("../../Player")
+other_portal = NodePath("../Portal3")
+
+[node name="Portal5" parent="portal intro room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15271, 1.83474, 89.0552)
+player = NodePath("../../Player")
+other_portal = NodePath("../../get portal gun room/Portal2")
+
+[node name="get portal gun room" type="Node3D" parent="."]
+
+[node name="Portal2" parent="get portal gun room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15271, 1.83474, 93.5867)
+player = NodePath("../../Player")
+other_portal = NodePath("../../portal intro room/Portal5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="get portal gun room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.681, 103.558)
+material_override = SubResource("StandardMaterial3D_3pcu5")
+use_collision = true
+flip_faces = true
+size = Vector3(20, 10, 20)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="get portal gun room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827023, 4.56438, 103.412)
+light_energy = 2.778
+omni_range = 20.0
+omni_attenuation = 0.798
+
+[node name="collectible blaster" type="Node3D" parent="get portal gun room"]
+transform = Transform3D(-1, 0, 8.74228e-08, 8.74228e-08, -4.37114e-08, 1, 3.82137e-15, 1, 4.37114e-08, -0.388261, 0.806678, 104.11)
+script = ExtResource("9_xyoti")
+
+[node name="blasterR2" parent="get portal gun room/collectible blaster" instance=ExtResource("10_av82l")]
+transform = Transform3D(-2, 1.74846e-07, 7.64274e-15, 0, -8.74228e-08, 2, 1.74846e-07, 2, 8.74228e-08, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="get portal gun room/collectible blaster"]
+light_energy = 16.0
+omni_range = 2.443
+
+[node name="Area3D" type="Area3D" parent="get portal gun room/collectible blaster"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="get portal gun room/collectible blaster/Area3D"]
+shape = SubResource("BoxShape3D_i6djs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="get portal gun room"]
+transform = Transform3D(-1, -1.74846e-07, 2.66237e-07, 2.66237e-07, -4.37114e-08, 1, -1.74846e-07, 1, 4.37114e-08, -0.388256, -0.21245, 97.7958)
+mesh = SubResource("TextMesh_hetg6")
+skeleton = NodePath("../Label3D3")
+
+[node name="Label3D4" type="Label3D" parent="get portal gun room"]
+transform = Transform3D(-1, 0, 8.74228e-08, 8.74228e-08, -4.37114e-08, 1, 3.82137e-15, 1, 4.37114e-08, -0.388261, -0.30808, 98.0904)
+visible = false
+outline_modulate = Color(0.28485, 0.28485, 0.28485, 1)
+text = "It's dangerous to go alone!
+Take this."
+font = ExtResource("8_g0pka")
+font_size = 128
+
+[node name="Portal" parent="get portal gun room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.82456, 113.536)
+player = NodePath("../../Player")
+other_portal = NodePath("../../pixel room/Portal3")
+
+[node name="pixel room" type="Node3D" parent="."]
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="pixel room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827023, 4.56438, 141.434)
+light_energy = 2.778
+omni_range = 86.595
+omni_attenuation = 0.798
+
+[node name="Portal3" parent="pixel room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.54143, 122.749)
+player = NodePath("../../Player")
+other_portal = NodePath("../../get portal gun room/Portal")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="pixel room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.681, 142.743)
+material_override = SubResource("StandardMaterial3D_3pcu5")
+use_collision = true
+flip_faces = true
+size = Vector3(40, 20, 40)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="pixel room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113921, 0.716722, 136.72)
+material_override = SubResource("StandardMaterial3D_ewe4y")
+use_collision = true
+size = Vector3(18.7476, 1, 15.8011)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="pixel room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113921, 2.46913, 148.924)
+material_override = SubResource("StandardMaterial3D_ewe4y")
+use_collision = true
+size = Vector3(5, 1, 5)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="pixel room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113921, 3.6532, 154.939)
+material_override = SubResource("StandardMaterial3D_ewe4y")
+use_collision = true
+size = Vector3(5, 1, 5)
+
+[node name="Portal" parent="pixel room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00357151, 3.25226, 135.253)
+player = NodePath("../../Player")
+other_portal = NodePath("../Portal4")
+
+[node name="Portal4" parent="pixel room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00357151, 3.25226, 141.253)
+player = NodePath("../../Player")
+other_portal = NodePath("../Portal")
+
+[node name="Portal2" parent="pixel room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.79116, 3.22025, 138.069)
+player = NodePath("../../Player")
+other_portal = NodePath("../Portal5")
+
+[node name="Portal5" parent="pixel room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.12104, 3.22025, 138.013)
+player = NodePath("../../Player")
+other_portal = NodePath("../Portal2")
+
+[node name="Portal6" parent="pixel room" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00880623, 6.21136, 157.157)
+player = NodePath("../../Player")
+other_portal = NodePath("../../pixel room 2/Portal7")
+
+[node name="pixel room 2" type="Node3D" parent="."]
+
+[node name="Portal7" parent="pixel room 2" node_paths=PackedStringArray("player", "other_portal") instance=ExtResource("3_455co")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09372, -0.904206, 165.216)
+player = NodePath("../../Player")
+other_portal = NodePath("../../pixel room/Portal6")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="pixel room 2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3.65301, -0.405046, 176.739)
+material_override = SubResource("StandardMaterial3D_ewe4y")
+use_collision = true
+size = Vector3(11.7598, 1, 10)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="pixel room 2"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, -8.95061, -0.405046, 170.958)
+material_override = SubResource("StandardMaterial3D_ewe4y")
+use_collision = true
+size = Vector3(11.7598, 1, 10)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="pixel room 2"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 1.64599, -0.405046, 170.958)
+material_override = SubResource("StandardMaterial3D_ewe4y")
+use_collision = true
+size = Vector3(11.7598, 1, 10)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="pixel room 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90735e-06, 4.681, 175.545)
+material_override = SubResource("StandardMaterial3D_3pcu5")
+use_collision = true
+flip_faces = true
+size = Vector3(40, 20, 20.8102)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="pixel room 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827023, 4.56438, 184.589)
+light_energy = 2.778
+omni_range = 86.595
+omni_attenuation = 0.798
+
+[node name="Player" parent="." instance=ExtResource("1_1r2ix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.22502, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3jvi4")
+
+[connection signal="body_entered" from="get portal gun room/collectible blaster/Area3D" to="get portal gun room/collectible blaster" method="_on_area_3d_body_entered"]
